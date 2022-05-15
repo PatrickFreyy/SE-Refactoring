@@ -1,7 +1,7 @@
 package main;
 
 class Rental {
-	private Movie movie;
+	private final Movie movie;
 	private int daysRented;
 
 	public Rental(Movie newmovie, int newdaysRented) {
@@ -15,5 +15,9 @@ class Rental {
 
 	public Movie getMovie() {
 		return movie;
+	}
+	
+	public void setDaysRented(int daysRented) {
+		this.daysRented = daysRented;
 	}
 }

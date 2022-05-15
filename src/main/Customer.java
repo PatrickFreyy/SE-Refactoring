@@ -3,23 +3,23 @@ package main;
 import java.util.Enumeration;
 import java.util.Vector;
 
-class Customer {
+public class Customer {
 	private String name;
 	private Vector<Rental> rentals = new Vector<Rental>();
 
-	public Customer(String newname) {
-		name = newname;
-	};
+	public Customer(String name) {
+		this.name = name;
+	}
 
-	public void addRental(Rental arg) {
-		rentals.addElement(arg);
-	};
+	public void addRental(Rental rental) {
+		rentals.addElement(rental);
+	}
 
 	public String getName() {
 		return name;
-	};
+	}
 
-	public String statement() {
+	public String receipt() {
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
 		Enumeration<Rental> enum_rentals = rentals.elements();
@@ -30,7 +30,7 @@ class Customer {
 			double thisAmount = 0;
 			Rental each = (Rental) enum_rentals.nextElement();
 			// determine amounts for each line
-			thisAmount = amountFor(each);
+			thisAmount = priceForRental(each);
 			// add frequent renter points
 			frequentRenterPoints++;
 			// add bonus for a two day new release rental
@@ -47,7 +47,7 @@ class Customer {
 		return result;
 	}
 
-	private double amountFor(Rental each) {
+	private double priceForRental(Rental each) {
 		double thisAmount = 0;
 		switch (each.getMovie().getPriceCode()) {
 		case Movie.REGULAR:
@@ -67,4 +67,15 @@ class Customer {
 		return thisAmount;
 	}
 
+	public Vector<Rental> getRentals() {
+		return rentals;
+	}
+
+	public void setRentals(Vector<Rental> rentals) {
+		this.rentals = rentals;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }
